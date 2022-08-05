@@ -1,0 +1,92 @@
+WHITE='\[\033[1;37m\]'
+LIGHTGRAY='\[\033[0;37m\]'
+BLACK='\[\033[0;30m\]'
+RED='\[\033[0;31m\]'
+GREEN='\[\033[0;32m\]'
+LIGHTGREEN='\[\033[1;32m\]'
+BLUE='\[\033[0;34m\]'
+DEFAULT='\[\033[0m\]'
+LIGHTCYAN='\[\033[1;36m\]'
+GRAY='\[\033[1;30m\]'
+
+cERROR=$RED
+cSUCCESS=$GREEN
+cLINES=$GREEN
+cCMD=$DEFAULT # Color of the command you type
+cBRACKETS=$LIGHTCYAN
+cNP=$LIGHTGRAY
+
+
+function command_prompt() {
+    PREVIOUS=$? #get sucess or fail
+
+    #New lines and now playing
+    if $(pgrep -x "spotify" >/dev/null) || $(pgrep -x "clementine" >/dev/null) || $(pgrep -x "cmus" >/dev/null); then
+    PS1="${cLINES} \n ┍━┉┉┅┅╍╍ \n │${cNP}\[\033[2;40m$( nowplaying )\]${cCMD}\n${cLINES}┍┷"
+    else
+    PS1="${cLINES}\n┍━"
+    fi
+
+    #User
+    PS1="${PS1}${cLINES}═ "
+    PS1="${PS1}${sesClr}${cUHS}\u"
+
+    #do sucess or fail
+    if [ $PREVIOUS -ne 0 ] ; then
+        PS1="${PS1}${cBRACKETS}${cERROR}|${cSUCCESS}"
+    else
+        PS1="${PS1}${cBRACKETS}${cSUCCESS}|"
+    fi
+
+    #Host session
+    PS1="${PS1}${cUHS}${UHS}\h${sesClr}"
+
+    #Current Directory
+    PS1="${PS1}${cSUCCESS}${cBRACKETS}[${cPWD}\w${cBRACKETS}]"
+
+    #Command Line
+    PS1="${PS1}\n${cLINES}╰─────────┰╼ \n ${cBRACKETS}$(cat ~/.phase.tmp|tr -d '\n')        ${cLINES}┖┄┄┄╢ ${cCMD}"
+}
+################################################################################
+#########THIS IS FOR THE TTY PROMPT#############################################
+################################################################################
+function tty_prompt() {
+	setfont cybercafe
+    #User
+    PS1="${cLINES}\n Çßåï"
+    PS1="${PS1}${sesClr}${cUHS}\u"
+    
+    #sucess or fail
+    PREVIOUS=$? 
+    if [ $PREVIOUS -ne 0 ] ; then
+        PS1="${PS1}${cBRACKETS}${cERROR}|${cSUCCESS}"
+    else
+        PS1="${PS1}${cBRACKETS}${cSUCCESS}|"
+    fi
+    #Host session
+    PS1="${PS1}${cUHS}${UHS}\h${sesClr}"
+    #Current Directory
+    PS1="${PS1}${cSUCCESS}${cBRACKETS}[${cPWD}\w${cBRACKETS}]"
+    #Command Line
+    TIME=$(date +%I:%M%P)
+    PS1="${PS1}\n${cLINES}Æêüé¼üØßåüµïêøÑªº¿ \n ${cBRACKETS} ${cNP} $TIME ${cLINES} íóúÉ¿å«áü ${cCMD}"
+
+}
+###############################################################################
+# load your custom prompt
+function load_prompt () {
+    PROMPT_COMMAND=command_prompt
+    export PS1 PROMPT_COMMAND
+}
+
+#function load_tty_prompt () {
+#    PROMPT_COMMAND=tty_prompt
+#    export PS1 PROMPT_COMMAND
+#}
+
+if ! tty | grep -q 'tty'
+then
+load_prompt
+else
+tty_prompt
+fi
