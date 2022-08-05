@@ -1,0 +1,214 @@
+/**
+ * ROFI Color theme
+ * User: milouse
+ * Copyright: Étienne Deparis (modified by ktn
+ */
+* {
+    selected-normal-foreground:  rgba ( 248, 242, 248, 90 % );
+    selected-urgent-foreground:  rgba ( 210, 253, 242, 100 % );
+    selected-active-foreground:  rgba ( 196, 255, 120, 100 % );
+    normal-foreground:           rgba ( 180, 160, 160, 100 % );
+    active-foreground:           rgba ( 66, 130, 42, 100 % );
+    urgent-foreground:           rgba ( 100, 120, 110, 100 % );
+    foreground:                  rgba ( 160, 179, 170, 100 % );
+    alternate-normal-background: rgba ( 10, 23, 10, 30 % );
+    alternate-urgent-background: rgba ( 39, 40, 34, 30 % );
+    alternate-active-background: rgba ( 39, 45, 34, 40 % );
+    selected-active-background:  rgba ( 30, 90, 40, 100 % );
+    selected-normal-background:  rgba ( 20, 80, 20, 100 % );
+    selected-urgent-background:  rgba ( 80, 90, 75, 100 % );
+    active-background:           rgba ( 39, 45, 34, 40 % );
+    urgent-background:           rgba ( 39, 40, 34, 30 % );
+    normal-background:           rgba ( 10, 23, 10, 5 % );
+    background:                  rgba ( 3, 5, 3, 70 % );
+    lightbg:                     rgba ( 138, 232, 213, 75 % );
+    lightfg:                     rgba ( 130, 194, 167, 75 % );
+    bordercolor:                 rgba ( 5, 15, 10, 100 % );
+    separatorcolor:              rgba ( 0, 100, 0, 50 % );
+    spacing:                     1;
+    font: "ProggyCleanTTSZ Nerd Font Book 12";
+}
+
+window {
+    background-color: @background;
+    border-radius: 1px;
+    padding:          2;
+    width:            385;
+    border:       1px 2px 5px ;
+    border-color: @bordercolor;
+}
+mainbox {
+    border:  0;
+    border-radius: 10px;
+    padding: 5;
+}
+message {
+   font: "ProggyCleanTTSZ Nerd Font Bold 13";
+    border:       1px 2px 3px ;
+    border-radius: 10px;
+    border-color: @separatorcolor;
+    padding:      100px 10px 100 ;
+}
+textbox {
+    text-color: @foreground;
+    border-radius: 10px;
+}
+listview {
+    fixed-height: 0;
+    border:       1px 2px 5px ;
+    border-radius: 10px;
+    border-color: @separatorcolor;
+    spacing:      1px ;
+    scrollbar:    false;
+    padding:      0px 0px 0px ;
+}
+element {
+    border:  0;
+    border-radius: 10px;
+    padding: 5px ;
+}
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+}
+element.normal.normal {
+    background-color: @normal-background;
+    text-color:       @normal-foreground;
+        border-radius: 10px;
+}
+element.normal.urgent {
+    background-color: @urgent-background;
+    text-color:       @urgent-foreground;
+}
+element.normal.active {
+    background-color: @active-background;
+    text-color:       @active-foreground;
+}
+element.selected.normal {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+element.selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color:       @selected-urgent-foreground;
+}
+element.selected.active {
+    background-color: @active-background;
+    text-color:       @active-foreground;
+}
+element.alternate.normal {
+    background-color: @normal-background;
+    text-color:       @normal-foreground;
+}
+element.alternate.urgent {
+    background-color: @urgent-background;
+    text-color:       @urgent-foreground;
+}
+element.alternate.active {
+    background-color: @active-background;
+    text-color:       @active-foreground;
+}
+
+scrollbar {
+    width:        2px ;
+    border:       0;
+    border-radius: 100px;
+    handle-width: 8px ;
+    padding:      0;
+}
+mode-switcher {
+    border:       10px 0px 0px ;
+//    border-radius: 10px;
+    border-color: @separatorcolor;
+}
+button.selected {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+inputbar {
+    spacing:    0;
+    text-color: @normal-foreground;
+    padding:    10px ;
+}
+case-indicator {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+entry {
+    spacing:    0;
+    text-color: @normal-foreground;
+    border-radius: 10px;
+}
+prompt {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+inputbar {
+    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+textbox-prompt-colon {
+    expand:     false;
+    str:        ":";
+    margin:     0px 0.3em 0em 0em ;
+    text-color: @normal-foreground;
+}
+configuration {
+	modi: "window,drun,filebrowser";
+/*	font: "mono 12";*/
+/*	location: 0;*/
+/*	yoffset: 0;*/
+/*	xoffset: 0;*/
+/*	fixed-num-lines: true;*/
+	show-icons: true;
+/*	terminal: "rofi-sensible-terminal";*/
+/*	ssh-client: "ssh";*/
+/*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
+/*	run-command: "{cmd}";*/
+/*	run-list-command: "";*/
+/*	run-shell-command: "{terminal} -e {cmd}";*/
+/*	window-command: "wmctrl -i -R {window}";*/
+/*	window-match-fields: "all";*/
+	icon-theme: "Simply-Green-Circles";
+        drun-match-fields: "name,generic,exec,categories,keywords";
+/*	drun-categories: ;*/
+/*	drun-show-actions: false;*/
+	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
+/*	drun-url-launcher: "xdg-open";*/
+/*	disable-history: false;*/
+/*	ignored-prefixes: "";*/
+	sort: true;
+	sorting-method: "normal";
+/*	case-sensitive: false;*/
+/*	cycle: true;*/
+/*	sidebar-mode: false;*/
+/*	hover-select: false;*/
+/*	eh: 1;*/
+/*	auto-select: false;*/
+/*	parse-hosts: false;*/
+/*	parse-known-hosts: true;*/
+/*	combi-modi: "window,run";*/
+/*	matching: "normal";*/
+/*	tokenize: true;*/
+/*	m: "-5";*/
+/*	filter: ;*/
+/*	dpi: -1;*/
+/*	threads: 0;*/
+/*	scroll-method: 0;*/
+/*	window-format: "{w}    {c}   {t}";*/
+	click-to-exit: true;
+/*	max-history-size: 25;*/
+/*	combi-hide-mode-prefix: false;*/
+/*	combi-display-format: "{mode} {text}";*/
+/*	matching-negate-char: '-' /* unsupported */;*/
+/*	cache-dir: ;*/
+/*	window-thumbnail: false;*/
+	drun-use-desktop-cache: false;
+}
+  timeout {
+      action: "kb-cancel";
+      delay: 1;
+  }
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
