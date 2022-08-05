@@ -1,0 +1,16 @@
+#!/bin/sh
+LIGHT=$( light|head -c 1 )
+        if [ $LIGHT = 1 ]; then
+            ICON="⏽⏽⏽"
+        elif [ $LIGHT -gt 8 ]; then
+            ICON="⏽⏽⏽"
+        elif [ $LIGHT -gt 6 ]; then
+            ICON="⏽⏽|"
+        elif [ $LIGHT -gt 4 ]; then
+            ICON="⏽||"
+        elif [ $LIGHT -gt 1 ]; then
+            ICON="|||"
+        else
+            ICON="Xxxx"
+        fi
+        echo %{O-7}$ICON%{O-8}
