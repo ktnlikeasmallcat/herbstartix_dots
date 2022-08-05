@@ -1,0 +1,202 @@
+#!/usr/bin/env bash
+# ██░ ██ ▓█████ ██▀███  ▄▄▄▄     ██████ ▄▄▄█████░▓█▓   █    ██   █████▒▄▄▄█████▓
+#▓██░ ██▒▓█   ▀▓██ ▒ ██▒█████▄ ▒██    ▒ ▓  ██▒ ▓▒██▒   ██  ▓██▒▓██   ▒ ▓  ██▒ ▓▒
+#▒██▀▀██░▒███  ▓██ ░▄█ ▒██▒ ▄██░ ▓██▄   ▒ ▓██░ ▒░██░  ▓██  ▒██░▒████ ░ ▒ ▓██░ ▒░
+#░▓█ ░██ ▒▓█  ▄▒██▀▀█▄ ▒██░█▀    ▒   ██▒░ ▓██▓ ░▒██░  ▒▓█  ░██░░▓█▒  ░ ░ ▓██▓ ░
+#░▓█▒░██▓░▒████░██▓ ▒██░▓█  ▀█▓▒██████▒▒  ▒██▒ ░░█████▒▒█████▓ ░▒█░      ▒██▒ ░
+# ▒ ░░▒░▒░░ ▒░ ░ ▒▓ ░▒▓░▒▓███▀▒▒ ▒▓▒ ▒ ░  ▒ ░░  ░ ▒░▓ ░▒▓▒ ▒ ▒  ▒ ░      ▒ ░░
+# ▒ ░▒░ ░ ░ ░    ░▒ ░ ▒▒░▒   ░ ░ ░▒  ░ ░    ░   ░ ░ ▒ ░░▒░ ░ ░  ░          ░
+# ░  ░░ ░   ░    ░░   ░ ░    ░ ░  ░  ░    ░       ░ ░  ░░░ ░ ░  ░ ░      ░
+# ░  ░  ░   ░     ░     ░            ░              ░    ░
+################################################################################
+hc(){ herbstclient "$@"
+}
+hc emit_hook reload
+killall -q pulseaudio &&
+pulseaudio &
+xscreensaver &
+picom --config /dev/null --experimental-backends --backend xrender --blur-background-fixed --blur-method kernel --blur-kern 5x5box &
+phases.sh &
+#picom --blur-kern 13,13,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 &
+hc keyunbind --all
+#######################################################################
+# ▄▀▀▄ █ ▄▀▀█▄▄▄▄  ▄▀▀▄ ▀▀▄ ▄▀▀█▄▄   ▄▀▀█▀▄    ▄▀▀▄ ▀▄  ▄▀▀█▄▄   ▄▀▀▀▀▄
+#█  █ ▄▀▐  ▄▀   ▐ █   ▀▄ ▄▀▐ ▄▀   █ █   █  █  █  █ █ █ █ ▄▀   █ █ █   ▐
+#▐  █▀▄   █▄▄▄▄▄  ▐     █    █▄▄▄▀  ▐   █  ▐  ▐  █  ▀█ ▐ █    █    ▀▄
+#  █   █  █    ▌        █    █   █      █       █   █    █    █ ▀▄   █
+#▄▀   █  ▄▀▄▄▄▄       ▄▀    ▄▀▄▄▄▀   ▄▀▀▀▀▀▄  ▄▀   █    ▄▀▄▄▄▄▀  █▀▀▀
+#█    ▐  █    ▐       █    █    ▐   █       █ █    ▐   █     ▐   ▐
+#▐       ▐            ▐    ▐        ▐       ▐ ▐        ▐
+#######################################################################
+Mod=Mod4
+Alt=Mod1
+
+        ## MAIN ##
+hc keybind $Mod-Shift-q         quit
+hc keybind $Mod-Shift-r         reload
+hc keybind $Mod-x               close
+hc keybind $Mod-Return          spawn roxterm -p Default
+hc keybind $Mod-Shift-Return    spawn roxterm -p Scratchpad
+hc keybind $Mod-Tab             spawn rofi -show window
+hc keybind $Mod-r               spawn rofi -show drun
+hc keybind $Mod-$Alt-r          spawn rofi -show run
+hc keybind $Mod-f               spawn rofi -show filebrowser
+hc keybind $Mod-b               spawn firefox
+hc keybind $Mod-c               spawn clementine
+hc keybind $Mod-Home            spawn caja ~
+hc keybind $Mod-$Alt-Return 	spawn ~/.config/herbstluftwm/scripts/q3terminal.sh
+hc keybind $Mod-W            	spawn bash togglewifi
+
+         ## FOCUSING ##
+hc keybind $Alt-Left            focus 	left
+hc keybind $Alt-Down            focus 	down
+hc keybind $Alt-Up              focus 	up
+hc keybind $Alt-Right           focus 	right
+hc keybind $Mod-Shift-Tab       cycle_all +1
+hc keybind $Mod-c               cycle
+hc keybind $Mod-u               jumpto 	urgent
+
+        ## MOVING ##
+hc keybind Control-$Alt-Left           use_index -1 --skip-visible
+hc keybind Control-$Alt-Right          use_index +1 --skip-visible
+hc keybind Control-$Alt-Shift-Left     chain , move_index -1 --skip-visible , use_index -1 --skip-visible
+hc keybind Control-$Alt-Shift-Right    chain , move_index +1 --skip-visible , use_index +1 --skip-visible
+hc keybind $Mod-Shift-Left          shift 	   left
+hc keybind $Mod-Shift-Right         shift 	   right
+hc keybind $Mod-Shift-Up            shift 	   up
+hc keybind $Mod-Shift-Down          shift 	   down
+
+	##MONITORS##
+hc keybind $Mod-Up       cycle_monitor
+
+       ## RESIZING ##
+resizestep=0.02
+hc keybind $Mod-Control-Left    resize left     +$resizestep
+hc keybind $Mod-Control-Right   resize right    +$resizestep
+hc keybind $Mod-Control-Up      resize up       +$resizestep
+hc keybind $Mod-Control-Down    resize down     +$resizestep
+
+        ## FRAME SPLITTING ##
+#(create empty frame at the specified direction)#
+hc keybind $Mod-h             	split   bottom  0.5
+hc keybind $Mod-$Alt-h        	split   top     0.5
+hc keybind $Mod-v             	split   right   0.5
+hc keybind $Mod-$Alt-v        	split   left    0.5
+hc keybind $Mod-e		split   explode
+
+        ## FRAME LAYOUT ##
+hc keybind $Mod-o                   rotate
+hc keybind $Mod-$Alt-x              remove
+hc keybind $Mod-s                   floating 	toggle
+hc keybind $Mod-$Alt-f              fullscreen 	toggle
+hc keybind $Mod-p                   pseudotile 	toggle
+hc keybind $Mod-Shift-f set_attr    clients.focus.floating     toggle
+hc keybind $Mod-Shift-d set_attr    clients.focus.decorated    toggle
+hc keybind $Mod-Shift-m set_attr    clients.focus.minimized    toggle
+hc keybind $Mod-$Alt-m              jumpto last-minimized
+
+        ## MOUSE ##
+hc mouseunbind --all
+hc mousebind $Mod-Button1   move
+hc mousebind $Mod-Button2   zoom
+hc mousebind $Mod-Button3   resize
+
+        ## AUDIO ##
+hc keybind XF86AudioRaiseVolume spawn pactl set-sink-volume 0 +5%
+hc keybind XF86AudioLowerVolume spawn pactl set-sink-volume 0 -5%
+hc keybind XF86AudioMute spawn pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# The following cycles through the available layouts within a frame, but skips
+# layouts, if the layout change wouldn't affect the actual window positions.
+# I.e. if there are two windows within a frame, the grid layout is skipped.
+hc keybind $Mod-o                                                           \
+            or , and . compare tags.focus.curframe_wcount = 2                   \
+                     . cycle_layout +1 vertical horizontal max vertical grid    \
+               , cycle_layout +1
+
+###############################################
+#
+# ▄▀▀█▀▀▄  ▄▀▀▄ ▄▄  ▄▀▀█▄▄▄▄  ▄▀▀▄ ▄▀▄ ▄▀▀█▄▄▄▄
+#█    █ ▐ █  █   ▄▀▐  ▄▀   ▐ █  █ ▀  █▐  ▄▀   ▐
+#▐   █    ▐  █▄▄▄█   █▄▄▄▄▄  ▐  █    █  █▄▄▄▄▄
+#   █        █   █   █    ▌    █    █   █    ▌
+#   ▄▀     ▄▀   ▄▀  ▄▀▄▄▄▄   ▄▀   ▄▀   ▄▀▄▄▄▄
+#  █      █    █    █    ▐   █     █   █    ▐
+# ▐       ▐    ▐    ▐        ▐    ▐    ▐
+###############################################
+
+        ##TITLES##
+hc attr theme.tiling.outer_width 1
+hc attr theme.tiling.title_when never
+hc attr theme.floating.title_when always
+hc attr theme.title_height 7
+hc attr theme.title_depth -1  # space below the title's baseline
+hc attr theme.title_color green
+hc attr theme.title_font 'ProggyCleanTTSZ Nerd Font:size=8'
+
+# Theme generated by herbstluftgen
+hc set frame_border_active_color darkgreen #'#241f31' #'#0d260f'
+hc set frame_border_normal_color '#000000'
+hc set frame_bg_normal_color black #'transparent'
+hc set frame_bg_active_color '#241f31' #'transparent'
+hc set frame_border_width 1
+hc set always_show_frame 0
+hc set frame_bg_transparent 1
+hc set frame_transparent_width 1
+hc set frame_gap 0
+hc set frame_padding 1
+hc set smart_frame_surroundings on
+hc set smart_window_surroundings on
+hc attr theme.active.color '#241f31'
+hc attr theme.normal.color '#0d260f' #'#000000'
+hc attr theme.urgent.color green #'#2ec27e'
+hc attr theme.inner_width 1
+hc attr theme.inner_color '#000000'
+hc attr theme.border_width 2
+hc attr theme.floating.border_width 2
+hc attr theme.floating.outer_width 1
+hc attr theme.floating.outer_color '#000000'
+hc attr theme.active.inner_color darkgreen #'#0d260f'
+hc attr theme.active.outer_color '#241f31'
+hc attr theme.background_color '#121212'
+hc pad :0 11 0 0 0
+hc unlock 0
+##################################################
+# ▄▀▀▄▀▀▀▄  ▄▀▀▄ ▄▀▀▄  ▄▀▀▀▀▄     ▄▀▀█▄▄▄▄  ▄▀▀▀▀▄
+#█   █   █ █   █    █ █    █     ▐  ▄▀   ▐ █ █   ▐
+#▐  █▀▀█▀  ▐  █    █  ▐    █       █▄▄▄▄▄     ▀▄
+# ▄▀    █    █    █       █        █    ▌  ▀▄   █
+#█     █      ▀▄▄▄▄▀    ▄▀▄▄▄▄▄▄▀ ▄▀▄▄▄▄    █▀▀▀
+#▐     ▐                █         █    ▐    ▐
+#                       ▐         ▐
+##################################################
+hc unrule-F
+hc rule focus=on # normally focus new clients
+hc rule floatplacement=center
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' floating=on
+hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
+hc rule fixedsize floating=on
+hc set tree_style '╾│ ├└╼─┐'
+
+        ## TAGS ##
+tag_names=( {1..5} )
+hc rename default 1
+for i in "${tag_names[@]} " ; do hc add "${tag_names[$i]}"; done
+
+hc detect_monitors
+
+	##PANELS##
+killall -q polybar
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+if xrandr --query|grep "VGA1 disconnected"
+then
+polybar -r main &
+nitrogen --set-color=black --set-zoom --random ~/.backgrounds &
+elif xrandr --query|grep "VGA1 connected"
+then
+polybar -r 1 & polybar -r 2 &
+nitrogen --set-color=black --set-zoom --random ~/.backgrounds --head=0 &
+nitrogen --set-color=black --set-zoom --random ~/.backgrounds --head=1 &
+fi
+done
